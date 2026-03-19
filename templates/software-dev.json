@@ -1,0 +1,172 @@
+{
+  "source": {
+    "type": "inline",
+    "manifest": {
+      "schemaVersion": 1,
+      "generatedAt": "2026-03-19T00:00:00.000Z",
+      "source": null,
+      "includes": {
+        "company": true,
+        "agents": true
+      },
+      "company": {
+        "path": "COMPANY.md",
+        "name": "Разработка ПО",
+        "description": "Шаблон компании: команда разработки ПО из 4 AI-агентов — CTO, backend-разработчик, frontend-разработчик и QA-инженер.",
+        "brandColor": "#3498db",
+        "requireBoardApprovalForNewAgents": true
+      },
+      "agents": [
+        {
+          "slug": "cto",
+          "name": "CTO",
+          "path": "agents/cto/AGENTS.md",
+          "role": "ceo",
+          "title": "Технический директор",
+          "icon": null,
+          "capabilities": "architecture, code_review, coordination, technical_decisions",
+          "reportsToSlug": null,
+          "adapterType": "openclaw_gateway",
+          "adapterConfig": {},
+          "runtimeConfig": {
+            "heartbeat": {
+              "intervalSec": 600,
+              "cooldownSec": 30,
+              "wakeOnAssignment": true,
+              "wakeOnDemand": true,
+              "maxConcurrentRuns": 2
+            }
+          },
+          "permissions": {
+            "canCreateAgents": true,
+            "canAssignIssues": true
+          },
+          "budgetMonthlyCents": 5000,
+          "metadata": {
+            "templateId": "software-dev",
+            "templateVersion": "1.0.0"
+          }
+        },
+        {
+          "slug": "backend-razrabotchik",
+          "name": "Backend-разработчик",
+          "path": "agents/backend-razrabotchik/AGENTS.md",
+          "role": "worker",
+          "title": "Backend-разработчик",
+          "icon": null,
+          "capabilities": "backend, api_development, database, testing",
+          "reportsToSlug": "cto",
+          "adapterType": "openclaw_gateway",
+          "adapterConfig": {},
+          "runtimeConfig": {
+            "heartbeat": {
+              "intervalSec": 300,
+              "cooldownSec": 15,
+              "wakeOnAssignment": true,
+              "wakeOnDemand": true,
+              "maxConcurrentRuns": 3
+            }
+          },
+          "permissions": {},
+          "budgetMonthlyCents": 5000,
+          "metadata": {
+            "templateId": "software-dev",
+            "templateVersion": "1.0.0"
+          }
+        },
+        {
+          "slug": "frontend-razrabotchik",
+          "name": "Frontend-разработчик",
+          "path": "agents/frontend-razrabotchik/AGENTS.md",
+          "role": "worker",
+          "title": "Frontend-разработчик",
+          "icon": null,
+          "capabilities": "frontend, ui_components, responsive_design, client_logic",
+          "reportsToSlug": "cto",
+          "adapterType": "openclaw_gateway",
+          "adapterConfig": {},
+          "runtimeConfig": {
+            "heartbeat": {
+              "intervalSec": 300,
+              "cooldownSec": 15,
+              "wakeOnAssignment": true,
+              "wakeOnDemand": true,
+              "maxConcurrentRuns": 3
+            }
+          },
+          "permissions": {},
+          "budgetMonthlyCents": 5000,
+          "metadata": {
+            "templateId": "software-dev",
+            "templateVersion": "1.0.0"
+          }
+        },
+        {
+          "slug": "qa-inzhener",
+          "name": "QA-инженер",
+          "path": "agents/qa-inzhener/AGENTS.md",
+          "role": "worker",
+          "title": "QA-инженер",
+          "icon": null,
+          "capabilities": "testing, automation, bug_reporting, quality_assurance",
+          "reportsToSlug": "cto",
+          "adapterType": "openclaw_gateway",
+          "adapterConfig": {},
+          "runtimeConfig": {
+            "heartbeat": {
+              "intervalSec": 300,
+              "cooldownSec": 15,
+              "wakeOnAssignment": true,
+              "wakeOnDemand": true,
+              "maxConcurrentRuns": 3
+            }
+          },
+          "permissions": {},
+          "budgetMonthlyCents": 5000,
+          "metadata": {
+            "templateId": "software-dev",
+            "templateVersion": "1.0.0"
+          }
+        }
+      ],
+      "requiredSecrets": []
+    },
+    "files": {
+      "COMPANY.md": "---\nkind: company\nname: \"Разработка ПО\"\ndescription: \"Шаблон компании: команда разработки ПО из 4 AI-агентов — CTO, backend-разработчик, frontend-разработчик и QA-инженер.\"\nbrandColor: \"#3498db\"\nrequireBoardApprovalForNewAgents: true\n---\n\n# Агенты\n\n- cto - CTO\n- backend-razrabotchik - Backend-разработчик\n- frontend-razrabotchik - Frontend-разработчик\n- qa-inzhener - QA-инженер\n\n# Цели\n\n- Выпустить MVP продукта\n- Обеспечить покрытие тестами 80%+\n",
+      "agents/cto/AGENTS.md": "---\nname: \"CTO\"\nslug: \"cto\"\nrole: \"ceo\"\nadapterType: \"openclaw_gateway\"\nkind: \"agent\"\nicon: null\ncapabilities: \"architecture, code_review, coordination, technical_decisions\"\nreportsTo: null\nruntimeConfig: {}\npermissions:\n  canCreateAgents: true\n  canAssignIssues: true\nadapterConfig: {}\nrequiredSecrets: []\n---\n\nТы технический директор. Определяй архитектуру, проводи код-ревью, координируй команду разработки.\n\n## Обязанности\n\n- Определение архитектуры и технического стека проекта\n- Проведение код-ревью и контроль качества кода\n- Координация работы backend, frontend и QA команды\n- Приоритизация технического долга\n- Принятие решений по инструментам и зависимостям\n- Планирование спринтов и распределение задач\n\n## Стиль работы\n\n- Декомпозируй крупные задачи на подзадачи перед назначением\n- Требуй тесты для каждого нового функционала\n- Проводи ревью всех merge/pull request\n- Эскалируй блокирующие проблемы и технические риски\n",
+      "agents/backend-razrabotchik/AGENTS.md": "---\nname: \"Backend-разработчик\"\nslug: \"backend-razrabotchik\"\nrole: \"worker\"\nadapterType: \"openclaw_gateway\"\nkind: \"agent\"\nicon: null\ncapabilities: \"backend, api_development, database, testing\"\nreportsTo: \"cto\"\nruntimeConfig: {}\npermissions: {}\nadapterConfig: {}\nrequiredSecrets: []\n---\n\nТы backend-разработчик. Пиши серверный код, API, работай с базами данных. Пиши тесты. Следуй code style проекта.\n\n## Обязанности\n\n- Разработка серверной логики и REST/GraphQL API\n- Проектирование и миграция схемы базы данных\n- Написание unit и integration тестов\n- Оптимизация производительности запросов и эндпоинтов\n- Документирование API эндпоинтов\n- Соблюдение code style и архитектурных паттернов проекта\n\n## Стиль работы\n\n- Следуй TDD: сначала тест, потом реализация\n- Используй параметризованные запросы (без сырого SQL)\n- Валидируй все входные данные на уровне API\n- Обрабатывай ошибки явно, с понятными сообщениями\n",
+      "agents/frontend-razrabotchik/AGENTS.md": "---\nname: \"Frontend-разработчик\"\nslug: \"frontend-razrabotchik\"\nrole: \"worker\"\nadapterType: \"openclaw_gateway\"\nkind: \"agent\"\nicon: null\ncapabilities: \"frontend, ui_components, responsive_design, client_logic\"\nreportsTo: \"cto\"\nruntimeConfig: {}\npermissions: {}\nadapterConfig: {}\nrequiredSecrets: []\n---\n\nТы frontend-разработчик. Создавай UI компоненты, вёрстку, клиентскую логику. Обеспечивай отзывчивый интерфейс.\n\n## Обязанности\n\n- Разработка UI компонентов и страниц\n- Адаптивная вёрстка (mobile-first)\n- Реализация клиентской бизнес-логики и состояния\n- Интеграция с backend API\n- Оптимизация производительности рендеринга\n- Обеспечение доступности (a11y) интерфейса\n\n## Стиль работы\n\n- Разбивай UI на переиспользуемые компоненты\n- Следуй дизайн-системе проекта\n- Тестируй компоненты визуально и unit-тестами\n- Минимизируй зависимости и размер бандла\n",
+      "agents/qa-inzhener/AGENTS.md": "---\nname: \"QA-инженер\"\nslug: \"qa-inzhener\"\nrole: \"worker\"\nadapterType: \"openclaw_gateway\"\nkind: \"agent\"\nicon: null\ncapabilities: \"testing, automation, bug_reporting, quality_assurance\"\nreportsTo: \"cto\"\nruntimeConfig: {}\npermissions: {}\nadapterConfig: {}\nrequiredSecrets: []\n---\n\nТы QA-инженер. Тестируй функционал, пиши автотесты, находи и документируй баги.\n\n## Обязанности\n\n- Ручное тестирование нового функционала\n- Написание и поддержка автоматизированных тестов (E2E, интеграционные)\n- Документирование найденных багов с шагами воспроизведения\n- Верификация исправлений (регрессионное тестирование)\n- Тестирование на различных окружениях и конфигурациях\n- Контроль покрытия тестами (целевое: 80%+)\n\n## Стиль работы\n\n- Описывай баги чётко: шаги, ожидаемый результат, фактический результат\n- Приоритизируй тесты по критичности функционала\n- Автоматизируй рутинные проверки\n- Сообщай о блокирующих багах немедленно\n"
+    }
+  },
+  "target": {
+    "mode": "new_company"
+  },
+  "include": {
+    "company": true,
+    "agents": true
+  },
+  "agents": "all",
+  "collisionStrategy": "rename",
+  "_template": {
+    "id": "software-dev",
+    "version": "1.0.0",
+    "locale": "ru",
+    "displayName": "Разработка ПО",
+    "description": "Команда из 4 агентов: CTO, backend-разработчик, frontend-разработчик и QA-инженер. Подходит для разработки программных продуктов.",
+    "goals": [
+      {
+        "title": "Выпустить MVP продукта",
+        "description": "Разработать и выпустить минимально жизнеспособный продукт (MVP) с основным функционалом.",
+        "level": "company",
+        "status": "planned"
+      },
+      {
+        "title": "Обеспечить покрытие тестами 80%+",
+        "description": "Достичь минимального покрытия кодовой базы тестами (unit, integration, E2E) не менее 80%.",
+        "level": "company",
+        "status": "planned"
+      }
+    ]
+  }
+}

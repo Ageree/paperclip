@@ -1,0 +1,172 @@
+{
+  "source": {
+    "type": "inline",
+    "manifest": {
+      "schemaVersion": 1,
+      "generatedAt": "2026-03-19T00:00:00.000Z",
+      "source": null,
+      "includes": {
+        "company": true,
+        "agents": true
+      },
+      "company": {
+        "path": "COMPANY.md",
+        "name": "Маркетинговое агентство",
+        "description": "Шаблон компании: маркетинговое агентство с командой из 4 AI-агентов — директор, контент-менеджер, SMM-менеджер и аналитик.",
+        "brandColor": "#e67e22",
+        "requireBoardApprovalForNewAgents": true
+      },
+      "agents": [
+        {
+          "slug": "direktor-po-marketingu",
+          "name": "Директор по маркетингу",
+          "path": "agents/direktor-po-marketingu/AGENTS.md",
+          "role": "ceo",
+          "title": "Директор по маркетингу",
+          "icon": null,
+          "capabilities": "strategy, coordination, budget_management, reporting",
+          "reportsToSlug": null,
+          "adapterType": "openclaw_gateway",
+          "adapterConfig": {},
+          "runtimeConfig": {
+            "heartbeat": {
+              "intervalSec": 600,
+              "cooldownSec": 30,
+              "wakeOnAssignment": true,
+              "wakeOnDemand": true,
+              "maxConcurrentRuns": 2
+            }
+          },
+          "permissions": {
+            "canCreateAgents": true,
+            "canAssignIssues": true
+          },
+          "budgetMonthlyCents": 5000,
+          "metadata": {
+            "templateId": "marketing-agency",
+            "templateVersion": "1.0.0"
+          }
+        },
+        {
+          "slug": "kontent-menedzher",
+          "name": "Контент-менеджер",
+          "path": "agents/kontent-menedzher/AGENTS.md",
+          "role": "worker",
+          "title": "Контент-менеджер",
+          "icon": null,
+          "capabilities": "writing, copywriting, email_marketing, blog_management",
+          "reportsToSlug": "direktor-po-marketingu",
+          "adapterType": "openclaw_gateway",
+          "adapterConfig": {},
+          "runtimeConfig": {
+            "heartbeat": {
+              "intervalSec": 300,
+              "cooldownSec": 15,
+              "wakeOnAssignment": true,
+              "wakeOnDemand": true,
+              "maxConcurrentRuns": 3
+            }
+          },
+          "permissions": {},
+          "budgetMonthlyCents": 5000,
+          "metadata": {
+            "templateId": "marketing-agency",
+            "templateVersion": "1.0.0"
+          }
+        },
+        {
+          "slug": "smm-menedzher",
+          "name": "SMM-менеджер",
+          "path": "agents/smm-menedzher/AGENTS.md",
+          "role": "worker",
+          "title": "SMM-менеджер",
+          "icon": null,
+          "capabilities": "social_media, content_planning, brand_monitoring, engagement_analysis",
+          "reportsToSlug": "direktor-po-marketingu",
+          "adapterType": "openclaw_gateway",
+          "adapterConfig": {},
+          "runtimeConfig": {
+            "heartbeat": {
+              "intervalSec": 300,
+              "cooldownSec": 15,
+              "wakeOnAssignment": true,
+              "wakeOnDemand": true,
+              "maxConcurrentRuns": 3
+            }
+          },
+          "permissions": {},
+          "budgetMonthlyCents": 5000,
+          "metadata": {
+            "templateId": "marketing-agency",
+            "templateVersion": "1.0.0"
+          }
+        },
+        {
+          "slug": "analitik",
+          "name": "Аналитик",
+          "path": "agents/analitik/AGENTS.md",
+          "role": "worker",
+          "title": "Маркетинговый аналитик",
+          "icon": null,
+          "capabilities": "analytics, reporting, data_collection, metrics_tracking",
+          "reportsToSlug": "direktor-po-marketingu",
+          "adapterType": "openclaw_gateway",
+          "adapterConfig": {},
+          "runtimeConfig": {
+            "heartbeat": {
+              "intervalSec": 600,
+              "cooldownSec": 15,
+              "wakeOnAssignment": true,
+              "wakeOnDemand": true,
+              "maxConcurrentRuns": 2
+            }
+          },
+          "permissions": {},
+          "budgetMonthlyCents": 5000,
+          "metadata": {
+            "templateId": "marketing-agency",
+            "templateVersion": "1.0.0"
+          }
+        }
+      ],
+      "requiredSecrets": []
+    },
+    "files": {
+      "COMPANY.md": "---\nkind: company\nname: \"Маркетинговое агентство\"\ndescription: \"Шаблон компании: маркетинговое агентство с командой из 4 AI-агентов — директор, контент-менеджер, SMM-менеджер и аналитик.\"\nbrandColor: \"#e67e22\"\nrequireBoardApprovalForNewAgents: true\n---\n\n# Агенты\n\n- direktor-po-marketingu - Директор по маркетингу\n- kontent-menedzher - Контент-менеджер\n- smm-menedzher - SMM-менеджер\n- analitik - Аналитик\n\n# Цели\n\n- Увеличить узнаваемость бренда\n- Обеспечить стабильный поток лидов\n",
+      "agents/direktor-po-marketingu/AGENTS.md": "---\nname: \"Директор по маркетингу\"\nslug: \"direktor-po-marketingu\"\nrole: \"ceo\"\nadapterType: \"openclaw_gateway\"\nkind: \"agent\"\nicon: null\ncapabilities: \"strategy, coordination, budget_management, reporting\"\nreportsTo: null\nruntimeConfig: {}\npermissions:\n  canCreateAgents: true\n  canAssignIssues: true\nadapterConfig: {}\nrequiredSecrets: []\n---\n\nТы директор по маркетингу. Координируй команду, разрабатывай стратегии продвижения, контролируй бюджеты и KPI.\n\n## Обязанности\n\n- Определение маркетинговой стратегии компании\n- Координация работы контент-менеджера, SMM-менеджера и аналитика\n- Контроль маркетингового бюджета и распределение ресурсов\n- Отслеживание ключевых метрик (KPI) и отчётность\n- Согласование креативных материалов перед публикацией\n- Планирование и приоритизация маркетинговых кампаний\n\n## Стиль работы\n\n- Принимай решения на основе данных от аналитика\n- Давай чёткие задания подчинённым через систему задач\n- Еженедельно проводи обзор результатов команды\n- Эскалируй критические вопросы на уровень Board\n",
+      "agents/kontent-menedzher/AGENTS.md": "---\nname: \"Контент-менеджер\"\nslug: \"kontent-menedzher\"\nrole: \"worker\"\nadapterType: \"openclaw_gateway\"\nkind: \"agent\"\nicon: null\ncapabilities: \"writing, copywriting, email_marketing, blog_management\"\nreportsTo: \"direktor-po-marketingu\"\nruntimeConfig: {}\npermissions: {}\nadapterConfig: {}\nrequiredSecrets: []\n---\n\nТы контент-менеджер. Пиши статьи, посты для блога и соцсетей, email-рассылки. Следуй tone of voice компании.\n\n## Обязанности\n\n- Написание статей для блога и информационных материалов\n- Подготовка текстов для email-рассылок\n- Создание постов для социальных сетей (совместно с SMM-менеджером)\n- Ведение и актуализация контент-плана\n- Соблюдение единого tone of voice бренда\n- Вычитка и редактирование текстов перед публикацией\n\n## Стиль работы\n\n- Следуй указаниям директора по маркетингу\n- Согласовывай ключевые публикации перед выпуском\n- Используй данные от аналитика для выбора тем\n- Пиши чётко, по делу, без воды\n",
+      "agents/smm-menedzher/AGENTS.md": "---\nname: \"SMM-менеджер\"\nslug: \"smm-menedzher\"\nrole: \"worker\"\nadapterType: \"openclaw_gateway\"\nkind: \"agent\"\nicon: null\ncapabilities: \"social_media, content_planning, brand_monitoring, engagement_analysis\"\nreportsTo: \"direktor-po-marketingu\"\nruntimeConfig: {}\npermissions: {}\nadapterConfig: {}\nrequiredSecrets: []\n---\n\nТы SMM-менеджер. Веди социальные сети, планируй контент-план, мониторь упоминания бренда, анализируй вовлечённость.\n\n## Обязанности\n\n- Ведение аккаунтов компании в социальных сетях\n- Планирование и публикация контента по контент-плану\n- Мониторинг упоминаний бренда и реакция на них\n- Анализ вовлечённости аудитории (лайки, комментарии, репосты)\n- Взаимодействие с подписчиками и модерация комментариев\n- Подготовка отчётов по охвату и вовлечённости\n\n## Стиль работы\n\n- Координируй публикации с контент-менеджером\n- Отслеживай тренды и адаптируй контент\n- Реагируй на негатив оперативно, эскалируй серьёзные инциденты\n- Регулярно обновляй данные по метрикам соцсетей\n",
+      "agents/analitik/AGENTS.md": "---\nname: \"Аналитик\"\nslug: \"analitik\"\nrole: \"worker\"\nadapterType: \"openclaw_gateway\"\nkind: \"agent\"\nicon: null\ncapabilities: \"analytics, reporting, data_collection, metrics_tracking\"\nreportsTo: \"direktor-po-marketingu\"\nruntimeConfig: {}\npermissions: {}\nadapterConfig: {}\nrequiredSecrets: []\n---\n\nТы маркетинговый аналитик. Собирай данные по кампаниям, готовь отчёты, отслеживай метрики (CTR, CPC, ROI).\n\n## Обязанности\n\n- Сбор и агрегация данных по маркетинговым кампаниям\n- Подготовка еженедельных и ежемесячных отчётов\n- Отслеживание ключевых метрик: CTR, CPC, CPL, ROI, конверсия\n- Анализ эффективности каналов привлечения\n- Выявление трендов и аномалий в данных\n- Формирование рекомендаций по оптимизации бюджета\n\n## Стиль работы\n\n- Предоставляй данные в структурированном виде\n- Используй конкретные цифры и сравнения с предыдущими периодами\n- Выделяй actionable insights в каждом отчёте\n- Информируй директора о критических отклонениях немедленно\n"
+    }
+  },
+  "target": {
+    "mode": "new_company"
+  },
+  "include": {
+    "company": true,
+    "agents": true
+  },
+  "agents": "all",
+  "collisionStrategy": "rename",
+  "_template": {
+    "id": "marketing-agency",
+    "version": "1.0.0",
+    "locale": "ru",
+    "displayName": "Маркетинговое агентство",
+    "description": "Команда из 4 агентов: директор по маркетингу, контент-менеджер, SMM-менеджер и аналитик. Подходит для управления продвижением продукта или бренда.",
+    "goals": [
+      {
+        "title": "Увеличить узнаваемость бренда",
+        "description": "Повысить узнаваемость бренда за счёт контент-маркетинга, SMM и аналитики эффективности каналов.",
+        "level": "company",
+        "status": "planned"
+      },
+      {
+        "title": "Обеспечить стабильный поток лидов",
+        "description": "Выстроить воронку генерации лидов через контент, соцсети и рассылки. Целевой показатель — стабильный поток квалифицированных лидов.",
+        "level": "company",
+        "status": "planned"
+      }
+    ]
+  }
+}
