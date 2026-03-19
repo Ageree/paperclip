@@ -19,42 +19,42 @@ import { AGENT_ROLE_LABELS } from "@paperclipai/shared";
 
 /* ---- Help text for (?) tooltips ---- */
 export const help: Record<string, string> = {
-  name: "Display name for this agent.",
-  title: "Job title shown in the org chart.",
-  role: "Organizational role. Determines position and capabilities.",
-  reportsTo: "The agent this one reports to in the org hierarchy.",
-  capabilities: "Describes what this agent can do. Shown in the org chart and used for task routing.",
-  adapterType: "How this agent runs: local CLI (Claude/Codex/OpenCode), OpenClaw Gateway, spawned process, or generic HTTP webhook.",
-  cwd: "Default working directory fallback for local adapters. Use an absolute path on the machine running Paperclip.",
-  promptTemplate: "Sent on every heartbeat. Keep this small and dynamic. Use it for current-task framing, not large static instructions. Supports {{ agent.id }}, {{ agent.name }}, {{ agent.role }} and other template variables.",
-  model: "Override the default model used by the adapter.",
-  thinkingEffort: "Control model reasoning depth. Supported values vary by adapter/model.",
-  chrome: "Enable Claude's Chrome integration by passing --chrome.",
-  dangerouslySkipPermissions: "Run Claude without permission prompts. Required for unattended operation.",
-  dangerouslyBypassSandbox: "Run Codex without sandbox restrictions. Required for filesystem/network access.",
-  search: "Enable Codex web search capability during runs.",
-  workspaceStrategy: "How Paperclip should realize an execution workspace for this agent. Keep project_primary for normal cwd execution, or use git_worktree for issue-scoped isolated checkouts.",
-  workspaceBaseRef: "Base git ref used when creating a worktree branch. Leave blank to use the resolved workspace ref or HEAD.",
-  workspaceBranchTemplate: "Template for naming derived branches. Supports {{issue.identifier}}, {{issue.title}}, {{agent.name}}, {{project.id}}, {{workspace.repoRef}}, and {{slug}}.",
-  worktreeParentDir: "Directory where derived worktrees should be created. Absolute, ~-prefixed, and repo-relative paths are supported.",
-  runtimeServicesJson: "Optional workspace runtime service definitions. Use this for shared app servers, workers, or other long-lived companion processes attached to the workspace.",
-  maxTurnsPerRun: "Maximum number of agentic turns (tool calls) per heartbeat run.",
-  command: "The command to execute (e.g. node, python).",
-  localCommand: "Override the path to the CLI command you want the adapter to call (e.g. /usr/local/bin/claude, codex, opencode).",
-  args: "Command-line arguments, comma-separated.",
-  extraArgs: "Extra CLI arguments for local adapters, comma-separated.",
-  envVars: "Environment variables injected into the adapter process. Use plain values or secret references.",
-  bootstrapPrompt: "Only sent when Paperclip starts a fresh session. Use this for stable setup guidance that should not be repeated on every heartbeat.",
-  payloadTemplateJson: "Optional JSON merged into remote adapter request payloads before Paperclip adds its standard wake and workspace fields.",
-  webhookUrl: "The URL that receives POST requests when the agent is invoked.",
-  heartbeatInterval: "Run this agent automatically on a timer. Useful for periodic tasks like checking for new work.",
-  intervalSec: "Seconds between automatic heartbeat invocations.",
-  timeoutSec: "Maximum seconds a run can take before being terminated. 0 means no timeout.",
-  graceSec: "Seconds to wait after sending interrupt before force-killing the process.",
-  wakeOnDemand: "Allow this agent to be woken by assignments, API calls, UI actions, or automated systems.",
-  cooldownSec: "Minimum seconds between consecutive heartbeat runs.",
-  maxConcurrentRuns: "Maximum number of heartbeat runs that can execute simultaneously for this agent.",
-  budgetMonthlyCents: "Monthly spending limit in cents. 0 means no limit.",
+  name: "Отображаемое имя агента.",
+  title: "Должность, показываемая в оргструктуре.",
+  role: "Организационная роль. Определяет положение и возможности.",
+  reportsTo: "Агент, которому подчиняется данный агент в иерархии.",
+  capabilities: "Описание возможностей агента. Отображается в оргструктуре и используется для маршрутизации задач.",
+  adapterType: "Способ запуска агента: локальный CLI (Claude/Codex/OpenCode), OpenClaw Gateway, порождённый процесс или HTTP webhook.",
+  cwd: "Рабочая директория по умолчанию для локальных адаптеров. Укажите абсолютный путь на машине, где запущен Paperclip.",
+  promptTemplate: "Отправляется при каждом heartbeat. Держите его компактным и динамичным. Используйте для текущей постановки задачи, а не для больших статических инструкций. Поддерживает {{ agent.id }}, {{ agent.name }}, {{ agent.role }} и другие шаблонные переменные.",
+  model: "Переопределить модель, используемую адаптером по умолчанию.",
+  thinkingEffort: "Глубина размышлений модели. Допустимые значения зависят от адаптера/модели.",
+  chrome: "Включить интеграцию Claude с Chrome через флаг --chrome.",
+  dangerouslySkipPermissions: "Запускать Claude без запросов разрешений. Необходимо для автономной работы.",
+  dangerouslyBypassSandbox: "Запускать Codex без ограничений sandbox. Необходимо для доступа к файловой системе и сети.",
+  search: "Включить веб-поиск Codex во время запусков.",
+  workspaceStrategy: "Как Paperclip должен создавать рабочее пространство для этого агента. Используйте project_primary для обычного выполнения в cwd или git_worktree для изолированных checkout по задачам.",
+  workspaceBaseRef: "Базовый git ref для создания ветки worktree. Оставьте пустым, чтобы использовать текущий ref рабочего пространства или HEAD.",
+  workspaceBranchTemplate: "Шаблон именования производных веток. Поддерживает {{issue.identifier}}, {{issue.title}}, {{agent.name}}, {{project.id}}, {{workspace.repoRef}} и {{slug}}.",
+  worktreeParentDir: "Директория для создания производных worktree. Поддерживаются абсолютные пути, пути с ~ и пути относительно репозитория.",
+  runtimeServicesJson: "Необязательные определения сервисов среды выполнения. Используйте для общих серверов приложений, воркеров или других долгоживущих процессов, привязанных к рабочему пространству.",
+  maxTurnsPerRun: "Максимальное количество агентных шагов (вызовов инструментов) за один heartbeat-запуск.",
+  command: "Команда для выполнения (например, node, python).",
+  localCommand: "Переопределить путь к CLI-команде, которую должен вызывать адаптер (например, /usr/local/bin/claude, codex, opencode).",
+  args: "Аргументы командной строки, через запятую.",
+  extraArgs: "Дополнительные CLI-аргументы для локальных адаптеров, через запятую.",
+  envVars: "Переменные окружения, передаваемые в процесс адаптера. Используйте простые значения или ссылки на секреты.",
+  bootstrapPrompt: "Отправляется только при запуске новой сессии Paperclip. Используйте для стабильных начальных инструкций, которые не нужно повторять при каждом heartbeat.",
+  payloadTemplateJson: "Необязательный JSON, объединяемый с payload запроса к удалённому адаптеру перед добавлением стандартных полей wake и workspace.",
+  webhookUrl: "URL, на который отправляются POST-запросы при вызове агента.",
+  heartbeatInterval: "Запускать агента автоматически по таймеру. Полезно для периодических задач, например, проверки новой работы.",
+  intervalSec: "Секунды между автоматическими heartbeat-вызовами.",
+  timeoutSec: "Максимальное время выполнения запуска в секундах. 0 — без ограничения.",
+  graceSec: "Секунды ожидания после отправки сигнала прерывания перед принудительным завершением процесса.",
+  wakeOnDemand: "Разрешить пробуждение агента по назначениям, API-вызовам, действиям в UI или автоматизированными системами.",
+  cooldownSec: "Минимальный интервал в секундах между последовательными heartbeat-запусками.",
+  maxConcurrentRuns: "Максимальное количество heartbeat-запусков, выполняемых одновременно для этого агента.",
+  budgetMonthlyCents: "Месячный лимит расходов в центах. 0 — без ограничения.",
 };
 
 export const adapterLabels: Record<string, string> = {
@@ -389,7 +389,7 @@ export function DraftNumberInput({
 }
 
 /**
- * "Choose" button that opens a dialog explaining the user must manually
+ * "Выбрать" button that opens a dialog explaining the user must manually
  * type the path due to browser security limitations.
  */
 export function ChoosePathButton() {
@@ -401,48 +401,48 @@ export function ChoosePathButton() {
         className="inline-flex items-center rounded-md border border-border px-2 py-0.5 text-xs text-muted-foreground hover:bg-accent/50 transition-colors shrink-0"
         onClick={() => setOpen(true)}
       >
-        Choose
+        Выбрать
       </button>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Specify path manually</DialogTitle>
+            <DialogTitle>Укажите путь вручную</DialogTitle>
             <DialogDescription>
-              Browser security blocks apps from reading full local paths via a file picker.
-              Copy the absolute path and paste it into the input.
+              Безопасность браузера не позволяет приложениям получать полные локальные пути через выбор файлов.
+              Скопируйте абсолютный путь и вставьте его в поле ввода.
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4 text-sm">
             <section className="space-y-1.5">
               <p className="font-medium">macOS (Finder)</p>
               <ol className="list-decimal space-y-1 pl-5 text-muted-foreground">
-                <li>Find the folder in Finder.</li>
-                <li>Hold <kbd>Option</kbd> and right-click the folder.</li>
-                <li>Click "Copy &lt;folder name&gt; as Pathname".</li>
-                <li>Paste the result into the path input.</li>
+                <li>Найдите папку в Finder.</li>
+                <li>Зажмите <kbd>Option</kbd> и нажмите правую кнопку мыши на папке.</li>
+                <li>Нажмите «Скопировать путь».</li>
+                <li>Вставьте результат в поле ввода пути.</li>
               </ol>
               <p className="rounded-md bg-muted px-2 py-1 font-mono text-xs">
                 /Users/yourname/Documents/project
               </p>
             </section>
             <section className="space-y-1.5">
-              <p className="font-medium">Windows (File Explorer)</p>
+              <p className="font-medium">Windows (Проводник)</p>
               <ol className="list-decimal space-y-1 pl-5 text-muted-foreground">
-                <li>Find the folder in File Explorer.</li>
-                <li>Hold <kbd>Shift</kbd> and right-click the folder.</li>
-                <li>Click "Copy as path".</li>
-                <li>Paste the result into the path input.</li>
+                <li>Найдите папку в Проводнике.</li>
+                <li>Зажмите <kbd>Shift</kbd> и нажмите правую кнопку мыши на папке.</li>
+                <li>Нажмите «Копировать как путь».</li>
+                <li>Вставьте результат в поле ввода пути.</li>
               </ol>
               <p className="rounded-md bg-muted px-2 py-1 font-mono text-xs">
                 C:\Users\yourname\Documents\project
               </p>
             </section>
             <section className="space-y-1.5">
-              <p className="font-medium">Terminal fallback (macOS/Linux)</p>
+              <p className="font-medium">Терминал (macOS/Linux)</p>
               <ol className="list-decimal space-y-1 pl-5 text-muted-foreground">
-                <li>Run <code>cd /path/to/folder</code>.</li>
-                <li>Run <code>pwd</code>.</li>
-                <li>Copy the output and paste it into the path input.</li>
+                <li>Выполните <code>cd /path/to/folder</code>.</li>
+                <li>Выполните <code>pwd</code>.</li>
+                <li>Скопируйте результат и вставьте в поле ввода пути.</li>
               </ol>
             </section>
           </div>
