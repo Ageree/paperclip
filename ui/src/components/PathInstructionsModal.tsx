@@ -20,28 +20,28 @@ const platforms: { id: Platform; label: string; icon: typeof Apple }[] = [
 const instructions: Record<Platform, { steps: string[]; tip?: string }> = {
   mac: {
     steps: [
-      "Open Finder and navigate to the folder.",
-      "Right-click (or Control-click) the folder.",
-      "Hold the Option (⌥) key — \"Copy\" changes to \"Copy as Pathname\".",
-      "Click \"Copy as Pathname\", then paste here.",
+      "Откройте Finder и перейдите к папке.",
+      "Нажмите правую кнопку мыши (или Control+клик) на папке.",
+      "Зажмите клавишу Option (⌥) — «Скопировать» изменится на «Скопировать путь».",
+      "Нажмите «Скопировать путь» и вставьте сюда.",
     ],
-    tip: "You can also open Terminal, type cd, drag the folder into the terminal window, and press Enter. Then type pwd to see the full path.",
+    tip: "Также можно открыть Терминал, набрать cd, перетащить папку в окно терминала и нажать Enter. Затем набрать pwd для отображения полного пути.",
   },
   windows: {
     steps: [
-      "Open File Explorer and navigate to the folder.",
-      "Click in the address bar at the top — the full path will appear.",
-      "Copy the path, then paste here.",
+      "Откройте Проводник и перейдите к папке.",
+      "Нажмите на адресную строку вверху — появится полный путь.",
+      "Скопируйте путь и вставьте сюда.",
     ],
-    tip: "Alternatively, hold Shift and right-click the folder, then select \"Copy as path\".",
+    tip: "Также можно зажать Shift и нажать правую кнопку мыши на папке, затем выбрать «Копировать как путь».",
   },
   linux: {
     steps: [
-      "Open a terminal and navigate to the directory with cd.",
-      "Run pwd to print the full path.",
-      "Copy the output and paste here.",
+      "Откройте терминал и перейдите в директорию с помощью cd.",
+      "Выполните pwd для вывода полного пути.",
+      "Скопируйте результат и вставьте сюда.",
     ],
-    tip: "In most file managers, Ctrl+L reveals the full path in the address bar.",
+    tip: "В большинстве файловых менеджеров Ctrl+L показывает полный путь в адресной строке.",
   },
 };
 
@@ -69,11 +69,11 @@ export function PathInstructionsModal({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle className="text-base">How to get a full path</DialogTitle>
+          <DialogTitle className="text-base">Как получить полный путь</DialogTitle>
           <DialogDescription>
-            Paste the absolute path (e.g.{" "}
+            Вставьте абсолютный путь (например,{" "}
             <code className="text-xs bg-muted px-1 py-0.5 rounded">/Users/you/project</code>
-            ) into the input field.
+            ) в поле ввода.
           </DialogDescription>
         </DialogHeader>
 
@@ -135,7 +135,7 @@ export function ChoosePathButton({ className }: { className?: string }) {
         )}
         onClick={() => setOpen(true)}
       >
-        Choose
+        Выбрать
       </button>
       <PathInstructionsModal open={open} onOpenChange={setOpen} />
     </>

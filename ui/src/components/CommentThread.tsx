@@ -101,7 +101,7 @@ function CopyMarkdownButton({ text }: { text: string }) {
     <button
       type="button"
       className="text-muted-foreground hover:text-foreground transition-colors"
-      title="Copy as markdown"
+      title="Копировать как markdown"
       onClick={() => {
         navigator.clipboard.writeText(text).then(() => {
           setCopied(true);
@@ -132,7 +132,7 @@ const TimelineList = memo(function TimelineList({
   highlightCommentId?: string | null;
 }) {
   if (timeline.length === 0) {
-    return <p className="text-sm text-muted-foreground">No comments or runs yet.</p>;
+    return <p className="text-sm text-muted-foreground">Пока нет комментариев и запусков.</p>;
   }
 
   return (
@@ -184,7 +184,7 @@ const TimelineList = memo(function TimelineList({
                   />
                 </Link>
               ) : (
-                <Identity name="You" size="sm" />
+                <Identity name="Вы" size="sm" />
               )}
               <span className="flex items-center gap-1.5">
                 {companyId ? (
@@ -392,7 +392,7 @@ export function CommentThread({
 
   return (
     <div className="space-y-4">
-      <h3 className="text-sm font-semibold">Comments &amp; Runs ({timeline.length})</h3>
+      <h3 className="text-sm font-semibold">Комментарии и запуски ({timeline.length})</h3>
 
       <TimelineList
         timeline={timeline}
@@ -409,7 +409,7 @@ export function CommentThread({
           ref={editorRef}
           value={body}
           onChange={setBody}
-          placeholder="Leave a comment..."
+          placeholder="Оставить комментарий..."
           mentions={mentions}
           onSubmit={handleSubmit}
           imageUploadHandler={imageUploadHandler}
@@ -430,7 +430,7 @@ export function CommentThread({
                 size="icon-sm"
                 onClick={() => attachInputRef.current?.click()}
                 disabled={attaching}
-                title="Attach image"
+                title="Прикрепить изображение"
               >
                 <Paperclip className="h-4 w-4" />
               </Button>
@@ -444,21 +444,21 @@ export function CommentThread({
                 onChange={(e) => setReopen(e.target.checked)}
                 className="rounded border-border"
               />
-              Re-open
+              Переоткрыть
             </label>
           )}
           {enableReassign && reassignOptions.length > 0 && (
             <InlineEntitySelector
               value={reassignTarget}
               options={reassignOptions}
-              placeholder="Assignee"
-              noneLabel="No assignee"
-              searchPlaceholder="Search assignees..."
-              emptyMessage="No assignees found."
+              placeholder="Исполнитель"
+              noneLabel="Нет исполнителя"
+              searchPlaceholder="Поиск исполнителей..."
+              emptyMessage="Исполнители не найдены."
               onChange={setReassignTarget}
               className="text-xs h-8"
               renderTriggerValue={(option) => {
-                if (!option) return <span className="text-muted-foreground">Assignee</span>;
+                if (!option) return <span className="text-muted-foreground">Исполнитель</span>;
                 const agentId = option.id.startsWith("agent:") ? option.id.slice("agent:".length) : null;
                 const agent = agentId ? agentMap?.get(agentId) : null;
                 return (
@@ -486,7 +486,7 @@ export function CommentThread({
             />
           )}
           <Button size="sm" disabled={!canSubmit} onClick={handleSubmit}>
-            {submitting ? "Posting..." : "Comment"}
+            {submitting ? "Отправка..." : "Комментировать"}
           </Button>
         </div>
       </div>

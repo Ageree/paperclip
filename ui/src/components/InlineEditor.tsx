@@ -24,7 +24,7 @@ export function InlineEditor({
   onSave,
   as: Tag = "span",
   className,
-  placeholder = "Click to edit...",
+  placeholder = "Нажмите для редактирования...",
   multiline = false,
   imageUploadHandler,
   mentions,
@@ -192,12 +192,12 @@ export function InlineEditor({
             )}
           >
             {autosaveState === "saving"
-              ? "Autosaving..."
+              ? "Автосохранение..."
               : autosaveState === "saved"
-                ? "Saved"
+                ? "Сохранено"
                 : autosaveState === "error"
-                  ? "Could not save"
-                  : "Idle"}
+                  ? "Не удалось сохранить"
+                  : ""}
           </span>
         </div>
       </div>

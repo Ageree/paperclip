@@ -10,7 +10,7 @@ interface CopyTextProps {
   copiedLabel?: string;
 }
 
-export function CopyText({ text, children, className, copiedLabel = "Copied!" }: CopyTextProps) {
+export function CopyText({ text, children, className, copiedLabel = "Скопировано!" }: CopyTextProps) {
   const [visible, setVisible] = useState(false);
   const [label, setLabel] = useState(copiedLabel);
   const timerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
@@ -21,7 +21,7 @@ export function CopyText({ text, children, className, copiedLabel = "Copied!" }:
       await navigator.clipboard.writeText(text);
       setLabel(copiedLabel);
     } catch {
-      setLabel("Copy failed");
+      setLabel("Ошибка копирования");
     }
     clearTimeout(timerRef.current);
     setVisible(true);
