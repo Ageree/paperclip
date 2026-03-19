@@ -2,9 +2,9 @@ import { UserPlus, Lightbulb, ShieldAlert, ShieldCheck } from "lucide-react";
 import { formatCents } from "../lib/utils";
 
 export const typeLabel: Record<string, string> = {
-  hire_agent: "Hire Agent",
-  approve_ceo_strategy: "CEO Strategy",
-  budget_override_required: "Budget Override",
+  hire_agent: "Найм агента",
+  approve_ceo_strategy: "Стратегия CEO",
+  budget_override_required: "Превышение бюджета",
 };
 
 export const typeIcon: Record<string, typeof UserPlus> = {

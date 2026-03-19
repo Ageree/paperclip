@@ -34,11 +34,11 @@ import { StatusBadge } from "./StatusBadge";
 import { ChoosePathButton } from "./PathInstructionsModal";
 
 const projectStatuses = [
-  { value: "backlog", label: "Backlog" },
-  { value: "planned", label: "Planned" },
-  { value: "in_progress", label: "In Progress" },
-  { value: "completed", label: "Completed" },
-  { value: "cancelled", label: "Cancelled" },
+  { value: "backlog", label: "Бэклог" },
+  { value: "planned", label: "Запланировано" },
+  { value: "in_progress", label: "В работе" },
+  { value: "completed", label: "Завершён" },
+  { value: "cancelled", label: "Отменено" },
 ];
 
 type WorkspaceSetup = "none" | "local" | "repo" | "both";

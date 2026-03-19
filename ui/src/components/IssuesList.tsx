@@ -29,8 +29,22 @@ import type { Issue } from "@paperclipai/shared";
 const statusOrder = ["in_progress", "todo", "backlog", "in_review", "blocked", "done", "cancelled"];
 const priorityOrder = ["critical", "high", "medium", "low"];
 
+const statusLabelMap: Record<string, string> = {
+  backlog: "Бэклог",
+  todo: "К выполнению",
+  in_progress: "В работе",
+  in_review: "На проверке",
+  done: "Выполнено",
+  cancelled: "Отменено",
+  blocked: "Заблокировано",
+  critical: "Критический",
+  high: "Высокий",
+  medium: "Средний",
+  low: "Низкий",
+};
+
 function statusLabel(status: string): string {
-  return status.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+  return statusLabelMap[status] ?? status.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
 /* ── View state ── */
@@ -60,10 +74,10 @@ const defaultViewState: IssueViewState = {
 };
 
 const quickFilterPresets = [
-  { label: "All", statuses: [] as string[] },
-  { label: "Active", statuses: ["todo", "in_progress", "in_review", "blocked"] },
-  { label: "Backlog", statuses: ["backlog"] },
-  { label: "Done", statuses: ["done", "cancelled"] },
+  { label: "Все", statuses: [] as string[] },
+  { label: "Активные", statuses: ["todo", "in_progress", "in_review", "blocked"] },
+  { label: "Бэклог", statuses: ["backlog"] },
+  { label: "Готово", statuses: ["done", "cancelled"] },
 ];
 
 function getViewState(key: string): IssueViewState {
