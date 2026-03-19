@@ -13,8 +13,8 @@ export function InstanceExperimentalSettings() {
 
   useEffect(() => {
     setBreadcrumbs([
-      { label: "Instance Settings" },
-      { label: "Experimental" },
+      { label: "Настройки сервера" },
+      { label: "Экспериментальное" },
     ]);
   }, [setBreadcrumbs]);
 
@@ -36,7 +36,7 @@ export function InstanceExperimentalSettings() {
   });
 
   if (experimentalQuery.isLoading) {
-    return <div className="text-sm text-muted-foreground">Loading experimental settings...</div>;
+    return <div className="text-sm text-muted-foreground">Загрузка экспериментальных настроек...</div>;
   }
 
   if (experimentalQuery.error) {
@@ -44,7 +44,7 @@ export function InstanceExperimentalSettings() {
       <div className="text-sm text-destructive">
         {experimentalQuery.error instanceof Error
           ? experimentalQuery.error.message
-          : "Failed to load experimental settings."}
+          : "Не удалось загрузить экспериментальные настройки."}
       </div>
     );
   }
@@ -56,10 +56,10 @@ export function InstanceExperimentalSettings() {
       <div className="space-y-2">
         <div className="flex items-center gap-2">
           <FlaskConical className="h-5 w-5 text-muted-foreground" />
-          <h1 className="text-lg font-semibold">Experimental</h1>
+          <h1 className="text-lg font-semibold">Экспериментальное</h1>
         </div>
         <p className="text-sm text-muted-foreground">
-          Opt into features that are still being evaluated before they become default behavior.
+          Включите функции, которые ещё оцениваются перед тем, как станут поведением по умолчанию.
         </p>
       </div>
 
@@ -72,10 +72,10 @@ export function InstanceExperimentalSettings() {
       <section className="rounded-xl border border-border bg-card p-5">
         <div className="flex items-start justify-between gap-4">
           <div className="space-y-1.5">
-            <h2 className="text-sm font-semibold">Enabled Isolated Workspaces</h2>
+            <h2 className="text-sm font-semibold">Изолированные рабочие пространства</h2>
             <p className="max-w-2xl text-sm text-muted-foreground">
-              Show execution workspace controls in project configuration and allow isolated workspace behavior for new
-              and existing issue runs.
+              Показывать элементы управления рабочими пространствами в настройках проекта и разрешить изолированное поведение
+              для новых и существующих запусков задач.
             </p>
           </div>
           <button

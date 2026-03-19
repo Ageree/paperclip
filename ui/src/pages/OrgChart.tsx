@@ -162,7 +162,7 @@ export function OrgChart() {
   }, [agents]);
 
   useEffect(() => {
-    setBreadcrumbs([{ label: "Org Chart" }]);
+    setBreadcrumbs([{ label: "Оргструктура" }]);
   }, [setBreadcrumbs]);
 
   // Layout computation
@@ -255,7 +255,7 @@ export function OrgChart() {
   }, [zoom, pan]);
 
   if (!selectedCompanyId) {
-    return <EmptyState icon={Network} message="Select a company to view the org chart." />;
+    return <EmptyState icon={Network} message="Выберите компанию для просмотра оргструктуры." />;
   }
 
   if (isLoading) {
@@ -263,7 +263,7 @@ export function OrgChart() {
   }
 
   if (orgTree && orgTree.length === 0) {
-    return <EmptyState icon={Network} message="No organizational hierarchy defined." />;
+    return <EmptyState icon={Network} message="Оргструктура не определена." />;
   }
 
   return (
@@ -327,8 +327,8 @@ export function OrgChart() {
             setZoom(fitZoom);
             setPan({ x: (cW - chartW) / 2, y: (cH - chartH) / 2 });
           }}
-          title="Fit to screen"
-          aria-label="Fit chart to screen"
+          title="Вписать в экран"
+          aria-label="Вписать в экран"
         >
           Fit
         </button>

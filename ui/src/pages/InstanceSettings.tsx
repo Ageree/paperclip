@@ -33,7 +33,7 @@ export function InstanceSettings() {
 
   useEffect(() => {
     setBreadcrumbs([
-      { label: "Instance Settings" },
+      { label: "Настройки сервера" },
       { label: "Heartbeats" },
     ]);
   }, [setBreadcrumbs]);
@@ -95,7 +95,7 @@ export function InstanceSettings() {
   }, [agents]);
 
   if (heartbeatsQuery.isLoading) {
-    return <div className="text-sm text-muted-foreground">Loading scheduler heartbeats...</div>;
+    return <div className="text-sm text-muted-foreground">Загрузка heartbeats...</div>;
   }
 
   if (heartbeatsQuery.error) {
@@ -103,7 +103,7 @@ export function InstanceSettings() {
       <div className="text-sm text-destructive">
         {heartbeatsQuery.error instanceof Error
           ? heartbeatsQuery.error.message
-          : "Failed to load scheduler heartbeats."}
+          : "Не удалось загрузить heartbeats."}
       </div>
     );
   }
@@ -113,10 +113,10 @@ export function InstanceSettings() {
       <div className="space-y-2">
         <div className="flex items-center gap-2">
           <Settings className="h-5 w-5 text-muted-foreground" />
-          <h1 className="text-lg font-semibold">Scheduler Heartbeats</h1>
+          <h1 className="text-lg font-semibold">Heartbeats планировщика</h1>
         </div>
         <p className="text-sm text-muted-foreground">
-          Agents with a timer heartbeat enabled across all of your companies.
+          Агенты с включённым таймером heartbeat по всем компаниям.
         </p>
       </div>
 
@@ -135,7 +135,7 @@ export function InstanceSettings() {
       {agents.length === 0 ? (
         <EmptyState
           icon={Clock3}
-          message="No scheduler heartbeats match the current criteria."
+          message="Нет heartbeats, соответствующих текущим критериям."
         />
       ) : (
         <div className="space-y-4">
@@ -194,7 +194,7 @@ export function InstanceSettings() {
                             disabled={saving}
                             onClick={() => toggleMutation.mutate(agent)}
                           >
-                            {saving ? "..." : agent.heartbeatEnabled ? "Disable Timer Heartbeat" : "Enable Timer Heartbeat"}
+                            {saving ? "..." : agent.heartbeatEnabled ? "Выключить таймер" : "Включить таймер"}
                           </Button>
                         </span>
                       </div>
