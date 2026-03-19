@@ -1,6 +1,10 @@
 {
   "name": "paperclip",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ageree/paperclip.git"
+  },
   "type": "module",
   "scripts": {
     "dev": "node scripts/dev-runner.mjs watch",
