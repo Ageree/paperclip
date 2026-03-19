@@ -110,7 +110,7 @@ export function NewProjectDialog() {
   const deriveWorkspaceNameFromPath = (value: string) => {
     const normalized = value.trim().replace(/[\\/]+$/, "");
     const segments = normalized.split(/[\\/]/).filter(Boolean);
-    return segments[segments.length - 1] ?? "Local folder";
+    return segments[segments.length - 1] ?? "Локальная папка";
   };
 
   const deriveWorkspaceNameFromRepo = (value: string) => {
@@ -118,9 +118,9 @@ export function NewProjectDialog() {
       const parsed = new URL(value);
       const segments = parsed.pathname.split("/").filter(Boolean);
       const repo = segments[segments.length - 1]?.replace(/\.git$/i, "") ?? "";
-      return repo || "GitHub repo";
+      return repo || "GitHub-репозиторий";
     } catch {
-      return "GitHub repo";
+      return "GitHub-репозиторий";
     }
   };
 

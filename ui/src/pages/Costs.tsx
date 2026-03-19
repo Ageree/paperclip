@@ -591,13 +591,13 @@ export function Costs() {
               value={activeBudgetIncidents.length > 0 ? String(activeBudgetIncidents.length) : (
                 spendData?.summary.budgetCents && spendData.summary.budgetCents > 0
                   ? `${spendData.summary.utilizationPercent}%`
-                  : "Open"
+                  : "Открытый"
               )}
               subtitle={
                 activeBudgetIncidents.length > 0
                   ? `${budgetData?.pausedAgentCount ?? 0} агентов приостановлено · ${budgetData?.pausedProjectCount ?? 0} проектов приостановлено`
                   : spendData?.summary.budgetCents && spendData.summary.budgetCents > 0
-                    ? `${formatCents(spendData.summary.spendCents)} of ${formatCents(spendData.summary.budgetCents)}`
+                    ? `${formatCents(spendData.summary.spendCents)} из ${formatCents(spendData.summary.budgetCents)}`
                     : "Месячный лимит не задан"
               }
               icon={Coins}

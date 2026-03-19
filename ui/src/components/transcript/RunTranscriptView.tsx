@@ -172,7 +172,7 @@ function summarizeToolInput(name: string, input: unknown, density: TranscriptDen
   const record = asRecord(input);
   if (!record) {
     const serialized = compactWhitespace(formatUnknown(input));
-    return serialized ? truncate(serialized, compactMax) : `Inspect ${name} input`;
+    return serialized ? truncate(serialized, compactMax) : `Просмотр ввода ${name}`;
   }
 
   const command = typeof record.command === "string"
@@ -198,7 +198,7 @@ function summarizeToolInput(name: string, input: unknown, density: TranscriptDen
   }
 
   const keys = Object.keys(record);
-  if (keys.length === 0) return `No ${name} input`;
+  if (keys.length === 0) return `Нет ввода ${name}`;
   if (keys.length === 1) return truncate(`${keys[0]} payload`, compactMax);
   return truncate(`${keys.length} fields: ${keys.slice(0, 3).join(", ")}`, compactMax);
 }
@@ -271,7 +271,7 @@ function parseSystemActivity(text: string): { activityId?: string; name: string;
   if (!match) return null;
   return {
     status: match[1].toLowerCase() === "started" ? "running" : "completed",
-    name: humanizeLabel(match[2] ?? "Activity"),
+    name: humanizeLabel(match[2] ?? "Действие"),
     activityId: match[3] || undefined,
   };
 }

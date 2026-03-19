@@ -37,7 +37,7 @@ function detailText(window: QuotaWindow): string | null {
     minute: "2-digit",
     timeZoneName: "short",
   });
-  return `Resets ${formatted}`;
+  return `Сбрасывается ${formatted}`;
 }
 
 function fillClass(usedPercent: number | null): string {

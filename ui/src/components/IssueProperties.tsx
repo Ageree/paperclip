@@ -256,7 +256,7 @@ export function IssueProperties({ issue, onUpdate, inline }: IssuePropertiesProp
   };
 
   const projectName = (id: string | null) => {
-    if (!id) return id?.slice(0, 8) ?? "None";
+    if (!id) return id?.slice(0, 8) ?? "Нет";
     const project = orderedProjects.find((p) => p.id === id);
     return project?.name ?? id.slice(0, 8);
   };

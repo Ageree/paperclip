@@ -69,7 +69,7 @@ export function ExecutionWorkspaceDetail() {
             </a>
           ) : workspace.repoUrl ? (
             <span className="break-all font-mono text-xs">{workspace.repoUrl}</span>
-          ) : "None"}
+          ) : "Нет"}
         </DetailRow>
         <DetailRow label="Открыт">{new Date(workspace.openedAt).toLocaleString()}</DetailRow>
         <DetailRow label="Последнее использование">{new Date(workspace.lastUsedAt).toLocaleString()}</DetailRow>

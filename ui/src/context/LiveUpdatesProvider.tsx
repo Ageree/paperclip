@@ -49,11 +49,11 @@ function resolveActorLabel(
   if (actorType === "agent" && actorId) {
     return resolveAgentName(queryClient, companyId, actorId) ?? `Agent ${shortId(actorId)}`;
   }
-  if (actorType === "system") return "System";
+  if (actorType === "system") return "Система";
   if (actorType === "user" && actorId) {
-    return "Board";
+    return "Доска";
   }
-  return "Someone";
+  return "Кто-то";
 }
 
 interface IssueToastContext {
@@ -111,7 +111,7 @@ function resolveIssueToastContext(
     readString(details?.identifier) ??
     readString(details?.issueIdentifier) ??
     cachedIssue?.identifier ??
-    `Issue ${shortId(issueId)}`;
+    `Задача ${shortId(issueId)}`;
   const title =
     readString(details?.title) ??
     readString(details?.issueTitle) ??
@@ -132,19 +132,19 @@ const TERMINAL_RUN_STATUSES = new Set(["succeeded", "failed", "timed_out", "canc
 function describeIssueUpdate(details: Record<string, unknown> | null): string | null {
   if (!details) return null;
   const changes: string[] = [];
-  if (typeof details.status === "string") changes.push(`status -> ${details.status.replace(/_/g, " ")}`);
-  if (typeof details.priority === "string") changes.push(`priority -> ${details.priority}`);
+  if (typeof details.status === "string") changes.push(`статус -> ${details.status.replace(/_/g, " ")}`);
+  if (typeof details.priority === "string") changes.push(`приоритет -> ${details.priority}`);
   if (typeof details.assigneeAgentId === "string" || typeof details.assigneeUserId === "string") {
-    changes.push("reassigned");
+    changes.push("переназначена");
   } else if (details.assigneeAgentId === null || details.assigneeUserId === null) {
-    changes.push("unassigned");
+    changes.push("снят исполнитель");
   }
   if (details.reopened === true) {
     const from = readString(details.reopenedFrom);
-    changes.push(from ? `reopened from ${from.replace(/_/g, " ")}` : "reopened");
+    changes.push(from ? `переоткрыта из ${from.replace(/_/g, " ")}` : "переоткрыта");
   }
-  if (typeof details.title === "string") changes.push("title changed");
-  if (typeof details.description === "string") changes.push("description changed");
+  if (typeof details.title === "string") changes.push("название изменено");
+  if (typeof details.description === "string") changes.push("описание изменено");
   if (changes.length > 0) return changes.join(", ");
   return null;
 }
@@ -175,10 +175,10 @@ function buildActivityToast(
 
   if (action === "issue.created") {
     return {
-      title: `${actor} created ${issue.ref}`,
+      title: `${actor} создал(а) ${issue.ref}`,
       body: issue.title ? truncate(issue.title, 96) : undefined,
       tone: "success",
-      action: { label: `View ${issue.ref}`, href: issue.href },
+      action: { label: `Открыть ${issue.ref}`, href: issue.href },
       dedupeKey: `activity:${action}:${entityId}`,
     };
   }
@@ -197,10 +197,10 @@ function buildActivityToast(
         ? truncate(issue.title, 96)
         : issue.label;
     return {
-      title: `${actor} updated ${issue.ref}`,
+      title: `${actor} обновил(а) ${issue.ref}`,
       body: truncate(body, 100),
       tone: "info",
-      action: { label: `View ${issue.ref}`, href: issue.href },
+      action: { label: `Открыть ${issue.ref}`, href: issue.href },
       dedupeKey: `activity:${action}:${entityId}`,
     };
   }
@@ -212,14 +212,14 @@ function buildActivityToast(
   const reopenedFrom = readString(details?.reopenedFrom);
   const reopenedLabel = reopened
     ? reopenedFrom
-      ? `reopened from ${reopenedFrom.replace(/_/g, " ")}`
-      : "reopened"
+      ? `переоткрыта из ${reopenedFrom.replace(/_/g, " ")}`
+      : "переоткрыта"
     : null;
   const title = reopened
-    ? `${actor} reopened and commented on ${issue.ref}`
+    ? `${actor} переоткрыл(а) и прокомментировал(а) ${issue.ref}`
     : updated
-      ? `${actor} commented and updated ${issue.ref}`
-      : `${actor} commented on ${issue.ref}`;
+      ? `${actor} прокомментировал(а) и обновил(а) ${issue.ref}`
+      : `${actor} прокомментировал(а) ${issue.ref}`;
   const body = bodySnippet
     ? reopenedLabel
       ? `${reopenedLabel} - ${bodySnippet.replace(/^#+\s*/m, "").replace(/\n/g, " ")}`
@@ -233,7 +233,7 @@ function buildActivityToast(
     title,
     body: body ? truncate(body, 96) : undefined,
     tone: "info",
-    action: { label: `View ${issue.ref}`, href: issue.href },
+    action: { label: `Открыть ${issue.ref}`, href: issue.href },
     dedupeKey: `activity:${action}:${entityId}:${commentId ?? "na"}`,
   };
 }
@@ -250,13 +250,13 @@ function buildJoinRequestToast(
   if (action !== "join.requested" && action !== "join.request_replayed") return null;
 
   const requestType = readString(details?.requestType);
-  const label = requestType === "agent" ? "Agent" : "Someone";
+  const label = requestType === "agent" ? "Агент" : "Кто-то";
 
   return {
-    title: `${label} wants to join`,
-    body: "A new join request is waiting for approval.",
+    title: `${label} хочет присоединиться`,
+    body: "Новый запрос на вступление ожидает одобрения.",
     tone: "info",
-    action: { label: "View inbox", href: "/inbox/unread" },
+    action: { label: "Открыть входящие", href: "/inbox/unread" },
     dedupeKey: `join-request:${entityId}`,
   };
 }
@@ -272,11 +272,11 @@ function buildAgentStatusToast(
   if (!agentId || !status || !AGENT_TOAST_STATUSES.has(status)) return null;
 
   const tone = status === "error" ? "error" : "info";
-  const name = nameOf(agentId) ?? `Agent ${shortId(agentId)}`;
+  const name = nameOf(agentId) ?? `Агент ${shortId(agentId)}`;
   const title =
     status === "running"
-      ? `${name} started`
-      : `${name} errored`;
+      ? `${name} запущен`
+      : `${name} — ошибка`;
 
   const agents = queryClient.getQueryData<Agent[]>(queryKeys.agents.list(companyId));
   const agent = agents?.find((a) => a.id === agentId);
@@ -286,7 +286,7 @@ function buildAgentStatusToast(
     title,
     body,
     tone,
-    action: { label: "View agent", href: `/agents/${agentId}` },
+    action: { label: "Открыть агента", href: `/agents/${agentId}` },
     dedupeKey: `agent-status:${agentId}:${status}`,
   };
 }
@@ -302,20 +302,20 @@ function buildRunStatusToast(
 
   const error = readString(payload.error);
   const triggerDetail = readString(payload.triggerDetail);
-  const name = nameOf(agentId) ?? `Agent ${shortId(agentId)}`;
+  const name = nameOf(agentId) ?? `Агент ${shortId(agentId)}`;
   const tone = status === "succeeded" ? "success" : status === "cancelled" ? "warn" : "error";
   const statusLabel =
-    status === "succeeded" ? "succeeded"
-      : status === "failed" ? "failed"
-        : status === "timed_out" ? "timed out"
-          : "cancelled";
-  const title = `${name} run ${statusLabel}`;
+    status === "succeeded" ? "завершён успешно"
+      : status === "failed" ? "завершён с ошибкой"
+        : status === "timed_out" ? "превышено время"
+          : "отменён";
+  const title = `${name}: запуск ${statusLabel}`;
 
   let body: string | undefined;
   if (error) {
     body = truncate(error, 100);
   } else if (triggerDetail) {
-    body = `Trigger: ${triggerDetail}`;
+    body = `Триггер: ${triggerDetail}`;
   }
 
   return {
@@ -323,7 +323,7 @@ function buildRunStatusToast(
     body,
     tone,
     ttlMs: status === "succeeded" ? 5000 : 7000,
-    action: { label: "View run", href: `/agents/${agentId}/runs/${runId}` },
+    action: { label: "Открыть запуск", href: `/agents/${agentId}/runs/${runId}` },
     dedupeKey: `run-status:${runId}:${status}`,
   };
 }

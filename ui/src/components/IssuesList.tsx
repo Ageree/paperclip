@@ -571,10 +571,10 @@ export function IssuesList({
               <PopoverContent align="end" className="w-44 p-0">
                 <div className="p-2 space-y-0.5">
                   {([
-                    ["status", "Status"],
-                    ["priority", "Priority"],
-                    ["assignee", "Assignee"],
-                    ["none", "None"],
+                    ["status", "Статус"],
+                    ["priority", "Приоритет"],
+                    ["assignee", "Исполнитель"],
+                    ["none", "Без группировки"],
                   ] as const).map(([value, label]) => (
                     <button
                       key={value}

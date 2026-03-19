@@ -85,13 +85,13 @@ function CloudAccessGate() {
   });
 
   if (healthQuery.isLoading || (isAuthenticatedMode && sessionQuery.isLoading)) {
-    return <div className="mx-auto max-w-xl py-10 text-sm text-muted-foreground">Loading...</div>;
+    return <div className="mx-auto max-w-xl py-10 text-sm text-muted-foreground">Загрузка...</div>;
   }
 
   if (healthQuery.error) {
     return (
       <div className="mx-auto max-w-xl py-10 text-sm text-destructive">
-        {healthQuery.error instanceof Error ? healthQuery.error.message : "Failed to load app state"}
+        {healthQuery.error instanceof Error ? healthQuery.error.message : "Не удалось загрузить состояние приложения"}
       </div>
     );
   }
@@ -183,15 +183,15 @@ function OnboardingRoutePage() {
     : null;
 
   const title = matchedCompany
-    ? `Add another agent to ${matchedCompany.name}`
+    ? `Добавить ещё одного агента в ${matchedCompany.name}`
     : companies.length > 0
-      ? "Create another company"
-      : "Create your first company";
+      ? "Создать ещё одну компанию"
+      : "Создайте свою первую компанию";
   const description = matchedCompany
-    ? "Run onboarding again to add an agent and a starter task for this company."
+    ? "Запустите онбординг снова, чтобы добавить агента и стартовую задачу для этой компании."
     : companies.length > 0
-      ? "Run onboarding again to create another company and seed its first agent."
-      : "Get started by creating a company and your first agent.";
+      ? "Запустите онбординг снова, чтобы создать ещё одну компанию и первого агента."
+      : "Начните с создания компании и вашего первого агента.";
 
   return (
     <div className="mx-auto max-w-xl py-10">
@@ -206,7 +206,7 @@ function OnboardingRoutePage() {
                 : openOnboarding()
             }
           >
-            {matchedCompany ? "Add Agent" : "Start Onboarding"}
+            {matchedCompany ? "Добавить агента" : "Начать онбординг"}
           </Button>
         </div>
       </div>
@@ -219,7 +219,7 @@ function CompanyRootRedirect() {
   const location = useLocation();
 
   if (loading) {
-    return <div className="mx-auto max-w-xl py-10 text-sm text-muted-foreground">Loading...</div>;
+    return <div className="mx-auto max-w-xl py-10 text-sm text-muted-foreground">Загрузка...</div>;
   }
 
   const targetCompany = selectedCompany ?? companies[0] ?? null;
@@ -243,7 +243,7 @@ function UnprefixedBoardRedirect() {
   const { companies, selectedCompany, loading } = useCompany();
 
   if (loading) {
-    return <div className="mx-auto max-w-xl py-10 text-sm text-muted-foreground">Loading...</div>;
+    return <div className="mx-auto max-w-xl py-10 text-sm text-muted-foreground">Загрузка...</div>;
   }
 
   const targetCompany = selectedCompany ?? companies[0] ?? null;

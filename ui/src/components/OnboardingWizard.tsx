@@ -128,7 +128,7 @@ export function OnboardingWizard() {
   const [showMoreAdapters, setShowMoreAdapters] = useState(false);
 
   // Step 3
-  const [taskTitle, setTaskTitle] = useState("Create your CEO HEARTBEAT.md");
+  const [taskTitle, setTaskTitle] = useState("Создайте свой CEO HEARTBEAT.md");
   const [taskDescription, setTaskDescription] = useState(
     DEFAULT_TASK_DESCRIPTION
   );
@@ -283,7 +283,7 @@ export function OnboardingWizard() {
     setAdapterEnvLoading(false);
     setForceUnsetAnthropicApiKey(false);
     setUnsetAnthropicLoading(false);
-    setTaskTitle("Create your CEO HEARTBEAT.md");
+    setTaskTitle("Создайте свой CEO HEARTBEAT.md");
     setTaskDescription(DEFAULT_TASK_DESCRIPTION);
     setCreatedCompanyId(null);
     setCreatedCompanyPrefix(null);
@@ -405,7 +405,7 @@ export function OnboardingWizard() {
         const selectedModelId = model.trim();
         if (!selectedModelId) {
           setError(
-            "OpenCode requires an explicit model in provider/model format."
+            "OpenCode требует явного указания модели в формате провайдер/модель."
           );
           return;
         }
@@ -413,13 +413,13 @@ export function OnboardingWizard() {
           setError(
             adapterModelsError instanceof Error
               ? adapterModelsError.message
-              : "Failed to load OpenCode models."
+              : "Не удалось загрузить модели OpenCode."
           );
           return;
         }
         if (adapterModelsLoading || adapterModelsFetching) {
           setError(
-            "OpenCode models are still loading. Please wait and try again."
+            "Модели OpenCode ещё загружаются. Подождите и попробуйте снова."
           );
           return;
         }
@@ -427,7 +427,7 @@ export function OnboardingWizard() {
         if (!discoveredModels.some((entry) => entry.id === selectedModelId)) {
           setError(
             discoveredModels.length === 0
-              ? "No OpenCode models discovered. Run `opencode models` and authenticate providers."
+              ? "Модели OpenCode не обнаружены. Выполните `opencode models` и авторизуйте провайдеров."
               : `Configured OpenCode model is unavailable: ${selectedModelId}`
           );
           return;
@@ -460,7 +460,7 @@ export function OnboardingWizard() {
       });
       setStep(3);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to create agent");
+      setError(err instanceof Error ? err.message : "Не удалось создать агента");
     } finally {
       setLoading(false);
     }
@@ -501,14 +501,14 @@ export function OnboardingWizard() {
       const result = await runAdapterEnvironmentTest(configWithUnset);
       if (result?.status === "fail") {
         setError(
-          "Retried with ANTHROPIC_API_KEY unset in adapter config, but the environment test is still failing."
+          "Повторная попытка с очищенным ANTHROPIC_API_KEY, но тест окружения по-прежнему не проходит."
         );
       }
     } catch (err) {
       setError(
         err instanceof Error
           ? err.message
-          : "Failed to unset ANTHROPIC_API_KEY and retry."
+          : "Не удалось сбросить ANTHROPIC_API_KEY и повторить попытку."
       );
     } finally {
       setUnsetAnthropicLoading(false);
@@ -552,7 +552,7 @@ export function OnboardingWizard() {
           : `/issues/${issueRef}`
       );
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to create task");
+      setError(err instanceof Error ? err.message : "Не удалось создать задачу");
     } finally {
       setLoading(false);
     }
@@ -592,7 +592,7 @@ export function OnboardingWizard() {
             className="absolute top-4 left-4 z-10 rounded-sm p-1.5 text-muted-foreground/60 hover:text-foreground transition-colors"
           >
             <X className="h-5 w-5" />
-            <span className="sr-only">Close</span>
+            <span className="sr-only">Закрыть</span>
           </button>
 
           {/* Left half — form */}
@@ -607,10 +607,10 @@ export function OnboardingWizard() {
               <div className="flex items-center gap-0 mb-8 border-b border-border">
                 {(
                   [
-                    { step: 1 as Step, label: "Company", icon: Building2 },
-                    { step: 2 as Step, label: "Agent", icon: Bot },
-                    { step: 3 as Step, label: "Task", icon: ListTodo },
-                    { step: 4 as Step, label: "Launch", icon: Rocket }
+                    { step: 1 as Step, label: "Компания", icon: Building2 },
+                    { step: 2 as Step, label: "Агент", icon: Bot },
+                    { step: 3 as Step, label: "Задача", icon: ListTodo },
+                    { step: 4 as Step, label: "Запуск", icon: Rocket }
                   ] as const
                 ).map(({ step: s, label, icon: Icon }) => (
                   <button
@@ -638,9 +638,9 @@ export function OnboardingWizard() {
                       <Building2 className="h-5 w-5 text-muted-foreground" />
                     </div>
                     <div>
-                      <h3 className="font-medium">Name your company</h3>
+                      <h3 className="font-medium">Назовите компанию</h3>
                       <p className="text-xs text-muted-foreground">
-                        This is the organization your agents will work for.
+                        Это организация, в которой будут работать ваши агенты.
                       </p>
                     </div>
                   </div>
@@ -653,11 +653,11 @@ export function OnboardingWizard() {
                           : "text-muted-foreground group-focus-within:text-foreground"
                       )}
                     >
-                      Company name
+                      Название компании
                     </label>
                     <input
                       className="w-full rounded-md border border-border bg-transparent px-3 py-2 text-sm outline-none focus:ring-1 focus:ring-ring placeholder:text-muted-foreground/50"
-                      placeholder="Acme Corp"
+                      placeholder="ООО «Пример»"
                       value={companyName}
                       onChange={(e) => setCompanyName(e.target.value)}
                       autoFocus
@@ -672,11 +672,11 @@ export function OnboardingWizard() {
                           : "text-muted-foreground group-focus-within:text-foreground"
                       )}
                     >
-                      Mission / goal (optional)
+                      Миссия / цель (необязательно)
                     </label>
                     <textarea
                       className="w-full rounded-md border border-border bg-transparent px-3 py-2 text-sm outline-none focus:ring-1 focus:ring-ring placeholder:text-muted-foreground/50 resize-none min-h-[60px]"
-                      placeholder="What is this company trying to achieve?"
+                      placeholder="Чего пытается достичь эта компания?"
                       value={companyGoal}
                       onChange={(e) => setCompanyGoal(e.target.value)}
                     />
@@ -691,15 +691,15 @@ export function OnboardingWizard() {
                       <Bot className="h-5 w-5 text-muted-foreground" />
                     </div>
                     <div>
-                      <h3 className="font-medium">Create your first agent</h3>
+                      <h3 className="font-medium">Создайте первого агента</h3>
                       <p className="text-xs text-muted-foreground">
-                        Choose how this agent will run tasks.
+                        Выберите, как этот агент будет выполнять задачи.
                       </p>
                     </div>
                   </div>
                   <div>
                     <label className="text-xs text-muted-foreground mb-1 block">
-                      Agent name
+                      Имя агента
                     </label>
                     <input
                       className="w-full rounded-md border border-border bg-transparent px-3 py-2 text-sm outline-none focus:ring-1 focus:ring-ring placeholder:text-muted-foreground/50"
@@ -713,7 +713,7 @@ export function OnboardingWizard() {
                   {/* Adapter type radio cards */}
                   <div>
                     <label className="text-xs text-muted-foreground mb-2 block">
-                      Adapter type
+                      Тип адаптера
                     </label>
                     <div className="grid grid-cols-2 gap-2">
                       {[
@@ -721,14 +721,14 @@ export function OnboardingWizard() {
                           value: "claude_local" as const,
                           label: "Claude Code",
                           icon: Sparkles,
-                          desc: "Local Claude agent",
+                          desc: "Локальный агент Claude",
                           recommended: true
                         },
                         {
                           value: "codex_local" as const,
                           label: "Codex",
                           icon: Code,
-                          desc: "Local Codex agent",
+                          desc: "Локальный агент Codex",
                           recommended: true
                         }
                       ].map((opt) => (
@@ -753,7 +753,7 @@ export function OnboardingWizard() {
                         >
                           {opt.recommended && (
                             <span className="absolute -top-1.5 right-1.5 bg-green-500 text-white text-[9px] font-semibold px-1.5 py-0.5 rounded-full leading-none">
-                              Recommended
+                              Рекомендуемый
                             </span>
                           )}
                           <opt.icon className="h-4 w-4" />
@@ -775,7 +775,7 @@ export function OnboardingWizard() {
                           showMoreAdapters ? "rotate-0" : "-rotate-90"
                         )}
                       />
-                      More Agent Adapter Types
+                      Другие типы адаптеров
                     </button>
 
                     {showMoreAdapters && (
@@ -785,39 +785,39 @@ export function OnboardingWizard() {
                             value: "gemini_local" as const,
                             label: "Gemini CLI",
                             icon: Gem,
-                            desc: "Local Gemini agent"
+                            desc: "Локальный агент Gemini"
                           },
                           {
                             value: "process" as const,
-                            label: "Process",
+                            label: "Процесс",
                             icon: Terminal,
-                            desc: "Run a local command"
+                            desc: "Запуск локальной команды"
                           },
                           {
                             value: "opencode_local" as const,
                             label: "OpenCode",
                             icon: OpenCodeLogoIcon,
-                            desc: "Local multi-provider agent"
+                            desc: "Локальный мультипровайдерный агент"
                           },
                           {
                             value: "pi_local" as const,
                             label: "Pi",
                             icon: Terminal,
-                            desc: "Local Pi agent"
+                            desc: "Локальный агент Pi"
                           },
                           {
                             value: "cursor" as const,
                             label: "Cursor",
                             icon: MousePointer2,
-                            desc: "Local Cursor agent"
+                            desc: "Локальный агент Cursor"
                           },
                           {
                             value: "openclaw_gateway" as const,
                             label: "OpenClaw Gateway",
                             icon: Bot,
-                            desc: "Invoke OpenClaw via gateway protocol",
+                            desc: "Вызов OpenClaw через шлюзовой протокол",
                             comingSoon: true,
-                            disabledLabel: "Configure OpenClaw within the App"
+                            disabledLabel: "Настройте OpenClaw в приложении"
                           }
                         ].map((opt) => (
                           <button
@@ -857,7 +857,7 @@ export function OnboardingWizard() {
                             <span className="text-muted-foreground text-[10px]">
                               {opt.comingSoon
                                 ? (opt as { disabledLabel?: string })
-                                    .disabledLabel ?? "Coming soon"
+                                    .disabledLabel ?? "Скоро"
                                 : opt.desc}
                             </span>
                           </button>
@@ -877,9 +877,9 @@ export function OnboardingWizard() {
                       <div>
                         <div className="flex items-center gap-1.5 mb-1">
                           <label className="text-xs text-muted-foreground">
-                            Working directory
+                            Рабочая директория
                           </label>
-                          <HintIcon text="Paperclip works best if you create a new folder for your agents to keep their memories and stay organized. Create a new folder and put the path here." />
+                          <HintIcon text="Paperclip лучше всего работает, если вы создадите новую папку для агентов, чтобы хранить их данные. Создайте новую папку и укажите путь к ней." />
                         </div>
                         <div className="flex items-center gap-2 rounded-md border border-border px-2.5 py-1.5">
                           <FolderOpen className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
@@ -894,7 +894,7 @@ export function OnboardingWizard() {
                       </div>
                       <div>
                         <label className="text-xs text-muted-foreground mb-1 block">
-                          Model
+                          Модель
                         </label>
                         <Popover
                           open={modelOpen}
@@ -914,8 +914,8 @@ export function OnboardingWizard() {
                                   ? selectedModel.label
                                   : model ||
                                     (adapterType === "opencode_local"
-                                      ? "Select model (required)"
-                                      : "Default")}
+                                      ? "Выберите модель (обязательно)"
+                                      : "По умолчанию")}
                               </span>
                               <ChevronDown className="h-3 w-3 text-muted-foreground" />
                             </button>
@@ -926,7 +926,7 @@ export function OnboardingWizard() {
                           >
                             <input
                               className="w-full px-2 py-1.5 text-xs bg-transparent outline-none border-b border-border mb-1 placeholder:text-muted-foreground/50"
-                              placeholder="Search models..."
+                              placeholder="Поиск моделей..."
                               value={modelSearch}
                               onChange={(e) => setModelSearch(e.target.value)}
                               autoFocus
@@ -942,7 +942,7 @@ export function OnboardingWizard() {
                                   setModelOpen(false);
                                 }}
                               >
-                                Default
+                                По умолчанию
                               </button>
                             )}
                             <div className="max-h-[240px] overflow-y-auto">
@@ -983,7 +983,7 @@ export function OnboardingWizard() {
                             </div>
                             {filteredModels.length === 0 && (
                               <p className="px-2 py-1.5 text-xs text-muted-foreground">
-                                No models discovered.
+                                Модели не обнаружены.
                               </p>
                             )}
                           </PopoverContent>
@@ -997,11 +997,11 @@ export function OnboardingWizard() {
                       <div className="flex items-center justify-between gap-2">
                         <div>
                           <p className="text-xs font-medium">
-                            Adapter environment check
+                            Проверка окружения адаптера
                           </p>
                           <p className="text-[11px] text-muted-foreground">
-                            Runs a live probe that asks the adapter CLI to
-                            respond with hello.
+                            Запускает тестовый запрос к CLI адаптера
+                            для проверки работоспособности.
                           </p>
                         </div>
                         <Button
@@ -1011,7 +1011,7 @@ export function OnboardingWizard() {
                           disabled={adapterEnvLoading}
                           onClick={() => void runAdapterEnvironmentTest()}
                         >
-                          {adapterEnvLoading ? "Testing..." : "Test now"}
+                          {adapterEnvLoading ? "Проверка..." : "Проверить"}
                         </Button>
                       </div>
 
@@ -1025,7 +1025,7 @@ export function OnboardingWizard() {
                       adapterEnvResult.status === "pass" ? (
                         <div className="flex items-center gap-2 rounded-md border border-green-300 dark:border-green-500/40 bg-green-50 dark:bg-green-500/10 px-3 py-2 text-xs text-green-700 dark:text-green-300 animate-in fade-in slide-in-from-bottom-1 duration-300">
                           <Check className="h-3.5 w-3.5 shrink-0" />
-                          <span className="font-medium">Passed</span>
+                          <span className="font-medium">Пройдено</span>
                         </div>
                       ) : adapterEnvResult ? (
                         <AdapterEnvironmentResult result={adapterEnvResult} />
@@ -1034,10 +1034,10 @@ export function OnboardingWizard() {
                       {shouldSuggestUnsetAnthropicApiKey && (
                         <div className="rounded-md border border-amber-300/60 bg-amber-50/40 px-2.5 py-2 space-y-2">
                           <p className="text-[11px] text-amber-900/90 leading-relaxed">
-                            Claude failed while{" "}
-                            <span className="font-mono">ANTHROPIC_API_KEY</span>{" "}
-                            is set. You can clear it in this CEO adapter config
-                            and retry the probe.
+                            Claude не прошёл проверку при установленном{" "}
+                            <span className="font-mono">ANTHROPIC_API_KEY</span>.{" "}
+                            Вы можете очистить его в конфигурации адаптера CEO
+                            и повторить проверку.
                           </p>
                           <Button
                             size="sm"
@@ -1049,15 +1049,15 @@ export function OnboardingWizard() {
                             onClick={() => void handleUnsetAnthropicApiKey()}
                           >
                             {unsetAnthropicLoading
-                              ? "Retrying..."
-                              : "Unset ANTHROPIC_API_KEY"}
+                              ? "Повторная попытка..."
+                              : "Сбросить ANTHROPIC_API_KEY"}
                           </Button>
                         </div>
                       )}
 
                       {adapterEnvResult && adapterEnvResult.status === "fail" && (
                         <div className="rounded-md border border-border/70 bg-muted/20 px-2.5 py-2 text-[11px] space-y-1.5">
-                          <p className="font-medium">Manual debug</p>
+                          <p className="font-medium">Ручная отладка</p>
                           <p className="text-muted-foreground font-mono break-all">
                             {adapterType === "cursor"
                               ? `${effectiveAdapterCommand} -p --mode ask --output-format json \"Respond with hello.\"`
@@ -1070,7 +1070,7 @@ export function OnboardingWizard() {
                               : `${effectiveAdapterCommand} --print - --output-format stream-json --verbose`}
                           </p>
                           <p className="text-muted-foreground">
-                            Prompt:{" "}
+                            Запрос:{" "}
                             <span className="font-mono">Respond with hello.</span>
                           </p>
                           {adapterType === "cursor" ||
@@ -1078,7 +1078,7 @@ export function OnboardingWizard() {
                           adapterType === "gemini_local" ||
                           adapterType === "opencode_local" ? (
                             <p className="text-muted-foreground">
-                              If auth fails, set{" "}
+                              Если авторизация не прошла, установите{" "}
                               <span className="font-mono">
                                 {adapterType === "cursor"
                                   ? "CURSOR_API_KEY"
@@ -1086,7 +1086,7 @@ export function OnboardingWizard() {
                                     ? "GEMINI_API_KEY"
                                     : "OPENAI_API_KEY"}
                               </span>{" "}
-                              in env or run{" "}
+                              в переменных среды или выполните{" "}
                               <span className="font-mono">
                                 {adapterType === "cursor"
                                   ? "agent login"
@@ -1100,9 +1100,9 @@ export function OnboardingWizard() {
                             </p>
                           ) : (
                             <p className="text-muted-foreground">
-                              If login is required, run{" "}
+                              Если требуется авторизация, выполните{" "}
                               <span className="font-mono">claude login</span>{" "}
-                              and retry.
+                              и повторите попытку.
                             </p>
                           )}
                         </div>
@@ -1114,22 +1114,22 @@ export function OnboardingWizard() {
                     <div className="space-y-3">
                       <div>
                         <label className="text-xs text-muted-foreground mb-1 block">
-                          Command
+                          Команда
                         </label>
                         <input
                           className="w-full rounded-md border border-border bg-transparent px-3 py-2 text-sm font-mono outline-none focus:ring-1 focus:ring-ring placeholder:text-muted-foreground/50"
-                          placeholder="e.g. node, python"
+                          placeholder="напр. node, python"
                           value={command}
                           onChange={(e) => setCommand(e.target.value)}
                         />
                       </div>
                       <div>
                         <label className="text-xs text-muted-foreground mb-1 block">
-                          Args (comma-separated)
+                          Аргументы (через запятую)
                         </label>
                         <input
                           className="w-full rounded-md border border-border bg-transparent px-3 py-2 text-sm font-mono outline-none focus:ring-1 focus:ring-ring placeholder:text-muted-foreground/50"
-                          placeholder="e.g. script.js, --flag"
+                          placeholder="напр. script.js, --flag"
                           value={args}
                           onChange={(e) => setArgs(e.target.value)}
                         />
@@ -1142,8 +1142,8 @@ export function OnboardingWizard() {
                     <div>
                       <label className="text-xs text-muted-foreground mb-1 block">
                         {adapterType === "openclaw_gateway"
-                          ? "Gateway URL"
-                          : "Webhook URL"}
+                          ? "URL шлюза"
+                          : "URL вебхука"}
                       </label>
                       <input
                         className="w-full rounded-md border border-border bg-transparent px-3 py-2 text-sm font-mono outline-none focus:ring-1 focus:ring-ring placeholder:text-muted-foreground/50"
@@ -1167,20 +1167,20 @@ export function OnboardingWizard() {
                       <ListTodo className="h-5 w-5 text-muted-foreground" />
                     </div>
                     <div>
-                      <h3 className="font-medium">Give it something to do</h3>
+                      <h3 className="font-medium">Дайте агенту задание</h3>
                       <p className="text-xs text-muted-foreground">
-                        Give your agent a small task to start with — a bug fix,
-                        a research question, writing a script.
+                        Дайте агенту небольшую задачу для начала — исправление бага,
+                        исследовательский вопрос, написание скрипта.
                       </p>
                     </div>
                   </div>
                   <div>
                     <label className="text-xs text-muted-foreground mb-1 block">
-                      Task title
+                      Название задачи
                     </label>
                     <input
                       className="w-full rounded-md border border-border bg-transparent px-3 py-2 text-sm outline-none focus:ring-1 focus:ring-ring placeholder:text-muted-foreground/50"
-                      placeholder="e.g. Research competitor pricing"
+                      placeholder="напр. Исследовать цены конкурентов"
                       value={taskTitle}
                       onChange={(e) => setTaskTitle(e.target.value)}
                       autoFocus
@@ -1188,12 +1188,12 @@ export function OnboardingWizard() {
                   </div>
                   <div>
                     <label className="text-xs text-muted-foreground mb-1 block">
-                      Description (optional)
+                      Описание (необязательно)
                     </label>
                     <textarea
                       ref={textareaRef}
                       className="w-full rounded-md border border-border bg-transparent px-3 py-2 text-sm outline-none focus:ring-1 focus:ring-ring placeholder:text-muted-foreground/50 resize-none min-h-[120px] max-h-[300px] overflow-y-auto"
-                      placeholder="Add more detail about what the agent should do..."
+                      placeholder="Добавьте подробности о том, что должен сделать агент..."
                       value={taskDescription}
                       onChange={(e) => setTaskDescription(e.target.value)}
                     />
@@ -1208,10 +1208,10 @@ export function OnboardingWizard() {
                       <Rocket className="h-5 w-5 text-muted-foreground" />
                     </div>
                     <div>
-                      <h3 className="font-medium">Ready to launch</h3>
+                      <h3 className="font-medium">Готово к запуску</h3>
                       <p className="text-xs text-muted-foreground">
-                        Everything is set up. Launching now will create the
-                        starter task, wake the agent, and open the issue.
+                        Всё настроено. Запуск создаст стартовую задачу,
+                        разбудит агента и откроет задачу.
                       </p>
                     </div>
                   </div>
@@ -1222,7 +1222,7 @@ export function OnboardingWizard() {
                         <p className="text-sm font-medium truncate">
                           {companyName}
                         </p>
-                        <p className="text-xs text-muted-foreground">Company</p>
+                        <p className="text-xs text-muted-foreground">Компания</p>
                       </div>
                       <Check className="h-4 w-4 text-green-500 shrink-0" />
                     </div>
@@ -1244,7 +1244,7 @@ export function OnboardingWizard() {
                         <p className="text-sm font-medium truncate">
                           {taskTitle}
                         </p>
-                        <p className="text-xs text-muted-foreground">Task</p>
+                        <p className="text-xs text-muted-foreground">Задача</p>
                       </div>
                       <Check className="h-4 w-4 text-green-500 shrink-0" />
                     </div>
@@ -1270,7 +1270,7 @@ export function OnboardingWizard() {
                       disabled={loading}
                     >
                       <ArrowLeft className="h-3.5 w-3.5 mr-1" />
-                      Back
+                      Назад
                     </Button>
                   )}
                 </div>
@@ -1286,7 +1286,7 @@ export function OnboardingWizard() {
                       ) : (
                         <ArrowRight className="h-3.5 w-3.5 mr-1" />
                       )}
-                      {loading ? "Creating..." : "Next"}
+                      {loading ? "Создание..." : "Далее"}
                     </Button>
                   )}
                   {step === 2 && (
@@ -1302,7 +1302,7 @@ export function OnboardingWizard() {
                       ) : (
                         <ArrowRight className="h-3.5 w-3.5 mr-1" />
                       )}
-                      {loading ? "Creating..." : "Next"}
+                      {loading ? "Создание..." : "Далее"}
                     </Button>
                   )}
                   {step === 3 && (
@@ -1316,7 +1316,7 @@ export function OnboardingWizard() {
                       ) : (
                         <ArrowRight className="h-3.5 w-3.5 mr-1" />
                       )}
-                      {loading ? "Creating..." : "Next"}
+                      {loading ? "Создание..." : "Далее"}
                     </Button>
                   )}
                   {step === 4 && (
@@ -1326,7 +1326,7 @@ export function OnboardingWizard() {
                       ) : (
                         <ArrowRight className="h-3.5 w-3.5 mr-1" />
                       )}
-                      {loading ? "Creating..." : "Create & Open Issue"}
+                      {loading ? "Создание..." : "Создать и открыть задачу"}
                     </Button>
                   )}
                 </div>
@@ -1356,10 +1356,10 @@ function AdapterEnvironmentResult({
 }) {
   const statusLabel =
     result.status === "pass"
-      ? "Passed"
+      ? "Пройдено"
       : result.status === "warn"
-      ? "Warnings"
-      : "Failed";
+      ? "Предупреждения"
+      : "Ошибка";
   const statusClass =
     result.status === "pass"
       ? "text-green-700 dark:text-green-300 border-green-300 dark:border-green-500/40 bg-green-50 dark:bg-green-500/10"
