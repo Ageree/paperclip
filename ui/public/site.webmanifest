@@ -1,8 +1,8 @@
 {
   "id": "/",
-  "name": "Paperclip",
-  "short_name": "Paperclip",
-  "description": "AI-powered project management and agent coordination platform",
+  "name": "Tensol",
+  "short_name": "Tensol",
+  "description": "AI-платформа для создания автономных организаций с ИИ агентами",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
