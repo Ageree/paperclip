@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import {
   ArrowLeft,
   Bot,
+  Brain,
   Code,
   Gem,
   MousePointer2,
@@ -29,7 +30,8 @@ type AdvancedAdapterType =
   | "opencode_local"
   | "pi_local"
   | "cursor"
-  | "openclaw_gateway";
+  | "openclaw_gateway"
+  | "hermes_local";
 
 const ADVANCED_ADAPTER_OPTIONS: Array<{
   value: AdvancedAdapterType;
@@ -81,6 +83,13 @@ const ADVANCED_ADAPTER_OPTIONS: Array<{
     label: "OpenClaw Gateway",
     icon: Bot,
     desc: "Вызов OpenClaw через протокол шлюза",
+  },
+  {
+    value: "hermes_local",
+    label: "Hermes Agent",
+    icon: Brain,
+    desc: "ИИ-агент с памятью, навыками и самообучением",
+    recommended: true,
   },
 ];
 
