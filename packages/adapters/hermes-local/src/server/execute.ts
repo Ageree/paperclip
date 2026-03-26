@@ -166,18 +166,11 @@ export async function execute(
     }
   }
 
-  // Validate working directory — must be absolute
+  // Validate working directory — must be absolute, fallback to home workspaces
   const rawCwd =
     asString(config.cwd, "") ||
-    asString((ctx.context as Record<string, unknown>)?.workspaceDir, "");
-  if (!rawCwd) {
-    return {
-      exitCode: 1,
-      signal: null,
-      timedOut: false,
-      errorMessage: "No working directory configured for Hermes agent",
-    };
-  }
+    asString((ctx.context as Record<string, unknown>)?.workspaceDir, "") ||
+    `/home/${process.env.USER || "paperclip"}/workspaces`;
   try {
     await ensureAbsoluteDirectory(rawCwd, { createIfMissing: true });
   } catch (err) {
