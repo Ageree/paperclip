@@ -34,6 +34,7 @@ const SUPPORTED_ADVANCED_ADAPTER_TYPES = new Set<CreateConfigValues["adapterType
   "pi_local",
   "cursor",
   "openclaw_gateway",
+  "hermes_local",
 ]);
 
 function createValuesForAdapterType(
@@ -51,6 +52,9 @@ function createValuesForAdapterType(
     nextValues.model = DEFAULT_CURSOR_LOCAL_MODEL;
   } else if (adapterType === "opencode_local") {
     nextValues.model = "";
+  } else if (adapterType === "hermes_local") {
+    nextValues.model = "anthropic/claude-sonnet-4.6";
+    nextValues.command = "hermes";
   }
   return nextValues;
 }
