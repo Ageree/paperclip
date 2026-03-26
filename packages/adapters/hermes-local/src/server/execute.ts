@@ -1,7 +1,6 @@
 import {
   runChildProcess,
   buildPaperclipEnv,
-  renderTemplate,
   ensureAbsoluteDirectory,
   asString,
   asNumber,
@@ -21,91 +20,24 @@ import {
   VALID_PROVIDERS,
 } from "../shared/constants.js";
 import { parseHermesOutput } from "./parse.js";
+import { buildHermesPrompt } from "./prompt.js";
+import { ensureHermesConfig } from "./setup.js";
 
 /** Env var keys that must never be overridden by user config. */
 const BLOCKED_ENV_KEYS = /^(PAPERCLIP_|ANTHROPIC_API_KEY|OPENAI_API_KEY|OPENROUTER_API_KEY|DEEPSEEK_API_KEY|HOME|PATH|USER|SHELL)$/i;
-
-const DEFAULT_PROMPT_TEMPLATE = `You are "{{agentName}}", an AI agent employee in a Paperclip-managed company.
-
-IMPORTANT: Use \`terminal\` tool with \`curl\` for ALL Paperclip API calls.
-
-Your Paperclip identity:
-  Agent ID: {{agentId}}
-  Company ID: {{companyId}}
-  API Base: {{paperclipApiUrl}}
-
-{{#taskId}}
-## Assigned Task
-
-Issue ID: {{taskId}}
-Title: {{taskTitle}}
-
-{{taskBody}}
-
-## Workflow
-
-1. Work on the task using your tools
-2. When done, mark the issue as completed:
-   \`curl -s -X PATCH "{{paperclipApiUrl}}/issues/{{taskId}}" -H "Content-Type: application/json" -d '{"status":"done"}'\`
-3. Report what you did
-{{/taskId}}
-
-{{#noTask}}
-## Heartbeat Wake — Check for Work
-
-1. List issues assigned to you:
-   \`curl -s "{{paperclipApiUrl}}/companies/{{companyId}}/issues?assigneeAgentId={{agentId}}&status=todo" | python3 -m json.tool\`
-
-2. If issues found, pick the highest priority one and work on it
-3. If no issues found, report briefly
-{{/noTask}}`;
-
-function buildPrompt(
-  ctx: AdapterExecutionContext,
-  config: Record<string, unknown>,
-): string {
-  const template = asString(config.promptTemplate, "") || DEFAULT_PROMPT_TEMPLATE;
-  const taskId = asString((ctx.context as Record<string, unknown>)?.taskId, "");
-  const taskTitle = asString((ctx.context as Record<string, unknown>)?.taskTitle, "");
-  const taskBody = asString((ctx.context as Record<string, unknown>)?.taskBody, "");
-  const agentName = ctx.agent.name || "Hermes Agent";
-
-  let paperclipApiUrl =
-    asString(config.paperclipApiUrl, "") ||
-    process.env.PAPERCLIP_API_URL ||
-    "http://127.0.0.1:3100/api";
-  if (!paperclipApiUrl.endsWith("/api")) {
-    paperclipApiUrl = paperclipApiUrl.replace(/\/+$/, "") + "/api";
-  }
-
-  const vars: Record<string, string> = {
-    agentId: ctx.agent.id || "",
-    agentName,
-    companyId: ctx.agent.companyId || "",
-    runId: ctx.runId || "",
-    taskId: taskId || "",
-    taskTitle,
-    taskBody,
-    paperclipApiUrl,
-  };
-
-  let rendered = template;
-  rendered = rendered.replace(
-    /\{\{#taskId\}\}([\s\S]*?)\{\{\/taskId\}\}/g,
-    taskId ? "$1" : "",
-  );
-  rendered = rendered.replace(
-    /\{\{#noTask\}\}([\s\S]*?)\{\{\/noTask\}\}/g,
-    taskId ? "" : "$1",
-  );
-
-  return renderTemplate(rendered, vars);
-}
 
 export async function execute(
   ctx: AdapterExecutionContext,
 ): Promise<AdapterExecutionResult> {
   const config = (ctx.agent.adapterConfig ?? {}) as Record<string, unknown>;
+
+  // Ensure Hermes config exists with auto-approval before first run
+  const homeDir = process.env.HOME || `/home/${process.env.USER || "paperclip"}`;
+  try {
+    await ensureHermesConfig(homeDir);
+  } catch {
+    // Non-fatal — config may already exist or dir may be read-only
+  }
 
   // Validate hermesCommand — only allow basename (no path separators)
   const rawHermesCmd = asString(config.hermesCommand, "");
@@ -121,7 +53,22 @@ export async function execute(
   const worktreeMode = asBoolean(config.worktreeMode, false);
   const checkpoints = asBoolean(config.checkpoints, false);
 
-  const prompt = buildPrompt(ctx, config);
+  const paperclipApiUrl =
+    asString(config.paperclipApiUrl, "") ||
+    process.env.PAPERCLIP_API_URL ||
+    "http://127.0.0.1:3100/api";
+
+  const prompt = buildHermesPrompt({
+    agentId: ctx.agent.id || "",
+    agentName: ctx.agent.name || "Hermes Agent",
+    companyId: ctx.agent.companyId || "",
+    runId: ctx.runId || "",
+    paperclipApiUrl,
+    taskId: asString((ctx.context as Record<string, unknown>)?.taskId, "") || undefined,
+    taskTitle: asString((ctx.context as Record<string, unknown>)?.taskTitle, ""),
+    taskBody: asString((ctx.context as Record<string, unknown>)?.taskBody, ""),
+    promptTemplate: asString(config.promptTemplate, "") || undefined,
+  });
 
   const useQuiet = asBoolean(config.quiet, true);
   const args = ["chat", "-q", prompt];
